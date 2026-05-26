@@ -15,6 +15,8 @@ public class Sonnet {
         this.linesOfPoem = linesOfPoem;
     }
 
+
+
     public Author getAuthor() {
         return author;
     }
