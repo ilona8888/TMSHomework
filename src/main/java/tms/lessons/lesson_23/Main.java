@@ -8,16 +8,17 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     private File fileInput = new File("src/main/resources/lesson_23/file.xml");
     private static File outputFile;
+
     public static void main(String[] args) throws Exception {
         File fileInput = new File("src/main/resources/lesson_23/file.xml");
 
-         //without using interface
-
+        //without using interface
 //        MyFileManagerDOM myFileManager = new MyFileManagerDOM();
 //        Sonnet sonnet = myFileManager.parse(fileInput);
 //        createOutputFileWithName(sonnet);
@@ -29,11 +30,33 @@ public class Main {
 //        writePoemToFile(sonnet.getLinesOfPoem());
 
         //using interface
-        SonnetParser parser = new MyFileManagerSax(); //or SonnetParser parser = new MyFileManagerDOM();
-        Sonnet sonnet = parser.parse(fileInput);
-        createOutputFileWithName(sonnet);
-        writePoemToFile(sonnet.getLinesOfPoem());
+//        SonnetParser parser = new MyFileManagerSax(); //or SonnetParser parser = new MyFileManagerDOM();
+//        Sonnet sonnet = parser.parse(fileInput);
+//        createOutputFileWithName(sonnet);
+//        writePoemToFile(sonnet.getLinesOfPoem());
 
+        System.out.println("Введите число. " +
+                "\n1 – распарсить документ с помощью SAX, если с консоли введено значение " +
+                "\n2 - распарсить документ с помощью DOM");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        SonnetParser parser = null;
+        switch (choice) {
+            case 1:
+                parser = new MyFileManagerSax();
+                break;
+            case 2:
+                parser = new MyFileManagerDOM();
+                break;
+        }
+
+        if (parser != null) {
+            Sonnet sonnet = parser.parse(fileInput);
+            createOutputFileWithName(sonnet);
+            writePoemToFile(sonnet.getLinesOfPoem());
+        } else System.out.println("Неверный ввод");
+
+        scanner.close();
 
 
     }
