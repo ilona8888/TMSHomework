@@ -17,39 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyFileManagerDOM implements SonnetParser {
-    private File inputFile;
-    private File outputFile;
-
-    public MyFileManagerDOM(File inputFile) {
-        this.inputFile = inputFile;
-    }
-
-    public void createOutputFileWithName(Sonnet sonnet) throws IOException {
-
-        outputFile = new File(String.format("src/main/resources/lesson_23/%s_%s_%s.txt",
-                sonnet.getAuthor().getFirstName(),
-                sonnet.getAuthor().getLastName(),
-                sonnet.getTitle()));
-        outputFile.createNewFile();
-    }
-
-    public void writePoemToFile(List<String> linesOfPoem) throws IOException {
-        if (outputFile != null) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
-                for (String line : linesOfPoem) {
-                    writer.write(line);
-                    writer.newLine();
-                }
-            }
-        }
-    }
 
     @Override
     public Sonnet parse(File file) throws ParserConfigurationException, IOException, SAXException {
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newDefaultInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        Document document = documentBuilder.parse(inputFile);
+        Document document = documentBuilder.parse(file);
 
         Node sonnetNode = document.getElementsByTagName("sonnet").item(0);
         Element sonnet = (Element) sonnetNode;

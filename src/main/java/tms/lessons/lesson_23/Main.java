@@ -3,18 +3,43 @@ package tms.lessons.lesson_23;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
+
+    private File fileInput = new File("src/main/resources/lesson_23/file.xml");
+    private static File outputFile;
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         File fileInput = new File("src/main/resources/lesson_23/file.xml");
 
-        MyFileManagerDOM myFileManager = new MyFileManagerDOM(fileInput);
-        //Sonnet sonnet = myFileManager.findSonnet();
+        MyFileManagerDOM myFileManager = new MyFileManagerDOM();
         Sonnet sonnet = myFileManager.parse(fileInput);
-        myFileManager.createOutputFileWithName(sonnet);
-        myFileManager.writePoemToFile(sonnet.getLinesOfPoem());
+        createOutputFileWithName(sonnet);
+        writePoemToFile(sonnet.getLinesOfPoem());
 
+    }
+
+    public static void createOutputFileWithName(Sonnet sonnet) throws IOException {
+
+        outputFile = new File(String.format("src/main/resources/lesson_23/%s_%s_%s.txt",
+                sonnet.getAuthor().getFirstName(),
+                sonnet.getAuthor().getLastName(),
+                sonnet.getTitle()));
+        outputFile.createNewFile();
+    }
+
+    public static void writePoemToFile(List<String> linesOfPoem) throws IOException {
+        if (outputFile != null) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+                for (String line : linesOfPoem) {
+                    writer.write(line);
+                    writer.newLine();
+                }
+            }
+        }
     }
 }
