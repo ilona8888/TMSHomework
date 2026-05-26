@@ -15,7 +15,8 @@ public class Sonnet {
         this.linesOfPoem = linesOfPoem;
     }
 
-
+    public Sonnet() {
+    }
 
     public Author getAuthor() {
         return author;
@@ -27,5 +28,17 @@ public class Sonnet {
 
     public List<String> getLinesOfPoem() {
         return linesOfPoem;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setLinesOfPoem(List<String> linesOfPoem) {
+        this.linesOfPoem = linesOfPoem;
     }
 }

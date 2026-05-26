@@ -15,6 +15,29 @@ public class Author {
         this.yearOfDeath = yearOfDeath;
     }
 
+    public Author() {
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public void setYearOfBirth(String yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+    }
+
+    public void setYearOfDeath(String yearOfDeath) {
+        this.yearOfDeath = yearOfDeath;
+    }
+
     public String getLastName() {
         return lastName;
     }

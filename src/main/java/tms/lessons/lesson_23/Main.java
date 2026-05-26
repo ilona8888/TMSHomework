@@ -13,13 +13,28 @@ public class Main {
 
     private File fileInput = new File("src/main/resources/lesson_23/file.xml");
     private static File outputFile;
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
+    public static void main(String[] args) throws Exception {
         File fileInput = new File("src/main/resources/lesson_23/file.xml");
 
-        MyFileManagerDOM myFileManager = new MyFileManagerDOM();
-        Sonnet sonnet = myFileManager.parse(fileInput);
+         //without using interface
+
+//        MyFileManagerDOM myFileManager = new MyFileManagerDOM();
+//        Sonnet sonnet = myFileManager.parse(fileInput);
+//        createOutputFileWithName(sonnet);
+//        writePoemToFile(sonnet.getLinesOfPoem());
+
+//        MyFileManagerSax myFileManagerSax = new MyFileManagerSax();
+//        Sonnet sonnet = myFileManagerSax.parse(fileInput);
+//        createOutputFileWithName(sonnet);
+//        writePoemToFile(sonnet.getLinesOfPoem());
+
+        //using interface
+        SonnetParser parser = new MyFileManagerSax(); //or SonnetParser parser = new MyFileManagerDOM();
+        Sonnet sonnet = parser.parse(fileInput);
         createOutputFileWithName(sonnet);
         writePoemToFile(sonnet.getLinesOfPoem());
+
+
 
     }
 
